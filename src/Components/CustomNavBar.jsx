@@ -1,11 +1,22 @@
-import React from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import logo from '../images/logo.png';
-import { Link } from 'react-router-dom';
 
-export default function CustomNavBar({ search }) {
-  function searchFilms(data) {
-    search(data);
+import { useDispatch } from 'react-redux';
+import { getAllMovie, movieSearch } from '../Redux/actions/movieAction';
+
+export default function CustomNavBar() {
+  function onSearch(data) {
+    filmSearch(data);
+  }
+  const dispatch = useDispatch();
+
+  //to search in API
+  async function filmSearch(word) {
+    if (word === '') {
+      dispatch(getAllMovie());
+    } else {
+      dispatch(movieSearch(word));
+    }
   }
   return (
     <div className="nav-style w-100">
@@ -23,7 +34,7 @@ export default function CustomNavBar({ search }) {
                 type="text"
                 className="form-control"
                 placeholder="Search for a movie"
-                onChange={(e) => searchFilms(e.target.value)}
+                onChange={(e) => onSearch(e.target.value)}
               ></input>
             </div>
           </Col>
