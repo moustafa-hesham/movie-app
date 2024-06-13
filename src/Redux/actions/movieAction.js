@@ -14,7 +14,9 @@ export function getAllMovie() {
 
 export function movieSearch(word) {
   return async (dispatch) => {
-    const res = await axios.get(`${searchAPI}${word}`);
+    const res = await axios.get(
+      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${word}&language=en`
+    );
     dispatch({
       type: AllMOVIES,
       data: res.data.results,
@@ -26,7 +28,7 @@ export function movieSearch(word) {
 export function getPage(page) {
   return async (dispatch) => {
     const res = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ar-US&page=${page}`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en&page=${page}`
     );
     dispatch({
       type: AllMOVIES,

@@ -11,7 +11,7 @@ export default function PaginationComponent() {
 
   useEffect(() => {
     setPageCount(pageData);
-  }, [pageData]);
+  }, []);
 
   const dispatch = useDispatch();
 
